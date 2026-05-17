@@ -9,7 +9,7 @@ export const sharedPageComponents: SharedLayout = {
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/tianyelezi/0x-nansha",
-      "在线站点": "https://tianyelezi.github.io/0x-nansha/",
+      在线站点: "https://tianyelezi.github.io/0x-nansha/",
     },
   }),
 }

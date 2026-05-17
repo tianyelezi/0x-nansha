@@ -2,14 +2,14 @@ import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
 /**
- * 0x:NANSHA · 南沙产业 Wiki — 复古科幻 (Retro Sci-Fi)
+ * 0x:NANSHA · 南沙产业 Wiki — 政务科技风 (Government Tech)
  *
- * Cyan/Magenta neon on deep-space black, CRT scanlines, terminal mono.
+ * 政务深蓝 + 中国红 + 鎏金点缀，白底简洁，思源黑体，适配政府汇报场景。
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "0x:NANSHA · 南沙产业 Wiki",
-    pageTitleSuffix: " ▸ 编译南沙产业知识图谱",
+    pageTitle: "广州南沙 8+2+3 现代化产业体系 · 知识图谱平台",
+    pageTitleSuffix: " · 0x:NANSHA",
     enableSPA: true,
     enablePopovers: true,
     analytics: null,
@@ -22,32 +22,35 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Orbitron",
-        body: "JetBrains Mono",
+        // 思源宋体（标题，权威感）+ 思源黑体（正文/code），Google Fonts 等价
+        header: "Noto Serif SC",
+        body: "Noto Sans SC",
         code: "JetBrains Mono",
       },
       colors: {
+        // 亮色（主用）：白底 + 政务深蓝 + 中国红
         lightMode: {
-          light: "#0a0e14",
-          lightgray: "#1c2230",
-          gray: "#6a7384",
-          darkgray: "#c9d4ff",
-          dark: "#e6f0ff",
-          secondary: "#00ffe1",
-          tertiary: "#ff2e88",
-          highlight: "rgba(0, 255, 225, 0.10)",
-          textHighlight: "#ff2e8855",
+          light: "#ffffff",
+          lightgray: "#e2e8f0",
+          gray: "#94a3b8",
+          darkgray: "#475569",
+          dark: "#0f172a",
+          secondary: "#1e40af", // 政务深蓝（链接 / 主标题）
+          tertiary: "#c8102e", // 中国红（重点强调，节制使用）
+          highlight: "rgba(30, 64, 175, 0.08)", // 极淡蓝色块
+          textHighlight: "#fde68a55", // 鎏金高亮（搜索 mark）
         },
+        // 暗色（夜读模式）：深邃蓝 + 暖金
         darkMode: {
-          light: "#06080d",
-          lightgray: "#11161f",
-          gray: "#5c6678",
-          darkgray: "#d4ddf5",
-          dark: "#eaf2ff",
-          secondary: "#00ffe1",
-          tertiary: "#ff2e88",
-          highlight: "rgba(0, 255, 225, 0.12)",
-          textHighlight: "#ff2e8855",
+          light: "#0a1424",
+          lightgray: "#1e293b",
+          gray: "#64748b",
+          darkgray: "#cbd5e1",
+          dark: "#f1f5f9",
+          secondary: "#60a5fa", // 浅蓝（暗底链接）
+          tertiary: "#fbbf24", // 暖金（替代红色保护可读性）
+          highlight: "rgba(96, 165, 250, 0.12)",
+          textHighlight: "#fbbf2455",
         },
       },
     },

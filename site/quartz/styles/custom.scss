@@ -1,262 +1,332 @@
 @use "./base.scss";
 
 /* =====================================================================
-   0x:NANSHA — 复古科幻 (Retro Sci-Fi / Cyberpunk-Lite)
-   Cyan/Magenta neon on deep-space black + CRT scanlines + terminal mono
+   0x:NANSHA — 政务科技风 (Government Tech)
+   政务深蓝 #1E40AF + 中国红 #C8102E + 鎏金 #C9A961
+   白底简洁、卡片化、思源黑体，适配政府汇报场景
    ===================================================================== */
 
 :root {
-  --neon-cyan: #00ffe1;
-  --neon-magenta: #ff2e88;
-  --neon-violet: #8b5cf6;
-  --neon-amber: #ffb020;
-  --crt-scanline: rgba(0, 255, 225, 0.04);
-  --crt-glow: 0 0 6px rgba(0, 255, 225, 0.45),
-              0 0 14px rgba(0, 255, 225, 0.22);
-  --magenta-glow: 0 0 6px rgba(255, 46, 136, 0.55),
-                  0 0 14px rgba(255, 46, 136, 0.28);
+  --gov-blue: #1e40af;
+  --gov-blue-deep: #1e3a8a;
+  --gov-blue-light: #3b82f6;
+  --gov-red: #c8102e;
+  --gov-gold: #c9a961;
+  --gov-bg: #ffffff;
+  --gov-bg-soft: #f8fafc;
+  --gov-bg-tint: #eff4ff;
+  --gov-border: #e2e8f0;
+  --gov-border-strong: #cbd5e1;
+  --gov-text: #0f172a;
+  --gov-text-sub: #475569;
+  --gov-text-muted: #94a3b8;
+  --gov-success: #059669;
+  --gov-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --gov-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06),
+                   0 1px 3px rgba(15, 23, 42, 0.04);
+  --gov-shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.08),
+                   0 2px 6px rgba(15, 23, 42, 0.04);
 }
 
-/* ---------- Page background: deep-space + grid + scanlines ---------- */
+/* ---------- Page background：白底 + 极淡纹理 ---------- */
 
 body {
-  background-color: #06080d;
-  background-image:
-    /* CRT scanlines */
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 2px,
-      var(--crt-scanline) 2px,
-      var(--crt-scanline) 3px
-    ),
-    /* faint grid */
-    linear-gradient(rgba(0, 255, 225, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 225, 0.04) 1px, transparent 1px),
-    /* radial neon vignette */
-    radial-gradient(
-      ellipse at top,
-      rgba(139, 92, 246, 0.18) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse at bottom right,
-      rgba(255, 46, 136, 0.12) 0%,
-      transparent 55%
-    );
-  background-size: 100% 3px, 32px 32px, 32px 32px, 100% 100%, 100% 100%;
+  background-color: var(--gov-bg-soft);
+  background-image: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    var(--gov-bg-soft) 600px
+  );
   background-attachment: fixed;
+  color: var(--gov-text);
+  font-feature-settings: "tnum" on; /* 表格数字等宽 */
 }
 
-/* Subtle CRT flicker on the whole viewport */
-@keyframes crt-flicker {
-  0%, 100% { opacity: 1; }
-  92% { opacity: 0.98; }
-  94% { opacity: 1; }
-  96% { opacity: 0.97; }
-}
-body > * {
-  animation: crt-flicker 6s infinite;
+/* 顶部 4px 政务三色条（蓝—金—红），呼应国家政务网风格 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--gov-blue) 0%,
+    var(--gov-blue) 60%,
+    var(--gov-gold) 60%,
+    var(--gov-gold) 80%,
+    var(--gov-red) 80%,
+    var(--gov-red) 100%
+  );
+  z-index: 1000;
+  pointer-events: none;
 }
 
-/* ---------- Headings: neon glow ---------- */
+/* ---------- 标题：思源宋体，权威感 ---------- */
 
-h1, h2, h3, h4 {
-  font-family: "Orbitron", "JetBrains Mono", ui-monospace, monospace !important;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  color: var(--gov-text);
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 h1 {
-  color: var(--neon-cyan) !important;
-  text-shadow: var(--crt-glow);
-  border-bottom: 1px solid rgba(0, 255, 225, 0.35);
-  padding-bottom: 0.35em;
+  font-size: 1.85rem;
+  border-bottom: 2px solid var(--gov-blue);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--gov-blue-deep);
 }
+
 h2 {
-  color: var(--neon-magenta) !important;
-  text-shadow: var(--magenta-glow);
+  font-size: 1.45rem;
+  color: var(--gov-blue-deep);
+  border-left: 4px solid var(--gov-blue);
+  padding-left: 0.7rem;
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
 }
+
 h3 {
-  color: var(--neon-amber) !important;
-  text-shadow: 0 0 5px rgba(255, 176, 32, 0.5);
+  font-size: 1.2rem;
+  color: var(--gov-blue);
+  margin-top: 1.6rem;
+  margin-bottom: 0.8rem;
+  position: relative;
+  padding-left: 0.8rem;
 }
+h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.4em;
+  width: 4px;
+  height: 0.9em;
+  background: var(--gov-gold);
+  border-radius: 1px;
+}
+
 h4 {
-  color: var(--neon-violet) !important;
+  font-size: 1.05rem;
+  color: var(--gov-text);
+  margin-top: 1.2rem;
 }
 
-/* H1 prefix marker */
-article > h1::before {
-  content: "▸ ";
-  color: var(--neon-magenta);
-  opacity: 0.75;
+/* anchor icon — 隐藏 emoji 锚链小图标 */
+.internal[role="anchor"] svg {
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+h1:hover .internal[role="anchor"] svg,
+h2:hover .internal[role="anchor"] svg,
+h3:hover .internal[role="anchor"] svg {
+  opacity: 0.4;
 }
 
-/* ---------- Body text + monospace look ---------- */
+/* ---------- 正文 ---------- */
 
-p, li, td, th {
-  font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.95rem;
-  line-height: 1.65;
+p, li {
+  font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--gov-text);
 }
 
-/* Internal wikilinks: cyan with magenta hover */
-a.internal {
-  color: var(--neon-cyan) !important;
-  background: rgba(0, 255, 225, 0.05);
-  border-radius: 2px;
-  padding: 0 0.2em;
+a {
+  color: var(--gov-blue);
   text-decoration: none;
-  transition: all 0.15s ease;
-  border-bottom: 1px dotted rgba(0, 255, 225, 0.55);
+  border-bottom: 1px solid transparent;
+  transition: all 0.15s;
 }
-a.internal:hover {
-  color: var(--neon-magenta) !important;
-  background: rgba(255, 46, 136, 0.12);
-  text-shadow: var(--magenta-glow);
-  border-bottom-color: var(--neon-magenta);
+a:hover {
+  color: var(--gov-blue-deep);
+  border-bottom-color: var(--gov-blue);
 }
 
-/* External links */
-a.external {
-  color: var(--neon-amber) !important;
+strong, b {
+  color: var(--gov-blue-deep);
+  font-weight: 600;
 }
 
-/* ---------- Code & pre: terminal aesthetic ---------- */
-
-pre,
-code {
-  font-family: "JetBrains Mono", ui-monospace, monospace !important;
-}
-
-pre {
-  background: #02040a !important;
-  border: 1px solid rgba(0, 255, 225, 0.35);
-  border-radius: 4px;
-  box-shadow: inset 0 0 24px rgba(0, 255, 225, 0.06),
-              0 0 0 1px rgba(0, 0, 0, 0.6);
-  position: relative;
-}
-pre::before {
-  content: "▌ TERMINAL";
-  position: absolute;
-  top: -10px;
-  left: 12px;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: var(--neon-cyan);
-  background: #06080d;
-  padding: 0 6px;
-  text-shadow: var(--crt-glow);
-}
-
-:not(pre) > code {
-  background: rgba(0, 255, 225, 0.08);
-  color: var(--neon-cyan);
-  border: 1px solid rgba(0, 255, 225, 0.25);
-  border-radius: 3px;
-  padding: 0.05em 0.35em;
-}
-
-/* ---------- Blockquotes: ASCII frame look ---------- */
-
-blockquote {
-  border-left: 3px solid var(--neon-magenta) !important;
-  background: rgba(255, 46, 136, 0.05);
+em, i {
+  color: var(--gov-text-sub);
   font-style: normal;
-  font-family: "JetBrains Mono", monospace;
-  color: #eaf2ff;
-  padding: 0.8em 1em;
-  margin: 1em 0;
-  position: relative;
-}
-blockquote::before {
-  content: "[NOTE]";
-  position: absolute;
-  top: -8px;
-  left: 8px;
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  color: var(--neon-magenta);
-  background: #06080d;
-  padding: 0 6px;
+  background: var(--gov-bg-tint);
+  padding: 0 0.25em;
+  border-radius: 2px;
 }
 
-/* ---------- Tables: data grid look ---------- */
+/* ---------- 表格：政务报告风（清晰边界、表头蓝底白字、斑马纹） ---------- */
 
 table {
   border-collapse: collapse;
-  border: 1px solid rgba(0, 255, 225, 0.35);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.85rem;
   width: 100%;
-}
-th {
-  background: linear-gradient(180deg, rgba(0, 255, 225, 0.12), rgba(0, 255, 225, 0.04));
-  color: var(--neon-cyan) !important;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border: 1px solid rgba(0, 255, 225, 0.4);
-  text-shadow: 0 0 4px rgba(0, 255, 225, 0.4);
-}
-td {
-  border: 1px solid rgba(0, 255, 225, 0.18);
-  background: rgba(2, 4, 10, 0.5);
-}
-tr:hover td {
-  background: rgba(255, 46, 136, 0.08);
+  margin: 1.2rem 0;
+  border: 1px solid var(--gov-border-strong);
+  box-shadow: var(--gov-shadow-sm);
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: 0.94rem;
 }
 
-/* ---------- Sidebar / explorer: terminal panel ---------- */
-
-.sidebar {
-  font-family: "JetBrains Mono", monospace;
+table thead {
+  background: var(--gov-blue-deep);
+}
+table thead th {
+  color: #ffffff !important;
+  font-weight: 600;
+  padding: 0.75rem 0.9rem;
+  text-align: left;
+  font-family: "Noto Sans SC", sans-serif;
+  border: none;
+  letter-spacing: 0.02em;
 }
 
+table tbody tr {
+  border-bottom: 1px solid var(--gov-border);
+  transition: background 0.1s;
+}
+table tbody tr:nth-child(even) {
+  background: var(--gov-bg-soft);
+}
+table tbody tr:hover {
+  background: var(--gov-bg-tint);
+}
+
+table td {
+  padding: 0.65rem 0.9rem;
+  border: none;
+  color: var(--gov-text);
+  vertical-align: top;
+}
+
+/* 表格内数字加粗用 tabular-nums */
+table td strong {
+  font-variant-numeric: tabular-nums;
+  color: var(--gov-blue-deep);
+}
+
+/* ---------- 引用块：政务通告样式 ---------- */
+
+blockquote {
+  background: var(--gov-bg-tint);
+  border-left: 4px solid var(--gov-blue);
+  padding: 0.9rem 1.2rem;
+  margin: 1.2rem 0;
+  color: var(--gov-text-sub);
+  border-radius: 0 4px 4px 0;
+  font-style: normal;
+  box-shadow: var(--gov-shadow-sm);
+}
+blockquote p {
+  margin: 0.4rem 0;
+}
+blockquote strong {
+  color: var(--gov-blue-deep);
+}
+
+/* ---------- Code & inline code ---------- */
+
+code:not(pre code) {
+  background: var(--gov-bg-tint);
+  color: var(--gov-blue-deep);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  font-family: "JetBrains Mono", "SF Mono", Consolas, monospace;
+  font-size: 0.88em;
+  border: 1px solid var(--gov-border);
+}
+
+pre {
+  background: var(--gov-bg-soft) !important;
+  border: 1px solid var(--gov-border);
+  border-left: 3px solid var(--gov-blue);
+  border-radius: 4px;
+  padding: 1rem 1.2rem !important;
+  box-shadow: var(--gov-shadow-sm);
+  font-size: 0.86rem;
+}
+pre code {
+  color: var(--gov-text) !important;
+  background: transparent !important;
+}
+
+/* ---------- 列表：清晰缩进 + 蓝色项目符号 ---------- */
+
+ul li::marker {
+  color: var(--gov-blue);
+}
+ol li::marker {
+  color: var(--gov-blue);
+  font-weight: 600;
+}
+
+ul, ol {
+  padding-left: 1.5rem;
+}
+
+/* ---------- 左侧栏（导航 / 探索器） ---------- */
+
+.left.sidebar {
+  background: #ffffff;
+  border-right: 1px solid var(--gov-border);
+}
+
+.page-title {
+  font-family: "Noto Serif SC", serif;
+  color: var(--gov-blue-deep);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid var(--gov-gold);
+}
 .page-title a {
-  color: var(--neon-cyan) !important;
-  text-shadow: var(--crt-glow);
-  font-family: "Orbitron", monospace !important;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: inherit;
+  border: none !important;
 }
 
-#explorer button.explorer-toggle,
-#explorer button {
-  color: var(--neon-cyan);
+.explorer h2,
+.explorer .explorer-toggle h2 {
+  font-size: 0.85rem;
+  color: var(--gov-text-sub);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-family: "Noto Sans SC", sans-serif;
+  border: none;
+  padding: 0;
 }
 
-#explorer ul li a {
-  color: #d4ddf5;
-  border-left: 1px solid rgba(0, 255, 225, 0.15);
-  padding-left: 0.5em;
-  transition: all 0.15s;
+.explorer a, .explorer .folder-title {
+  color: var(--gov-text-sub);
+  font-size: 0.88rem;
+  border: none !important;
 }
-#explorer ul li a:hover {
-  color: var(--neon-magenta);
-  border-left-color: var(--neon-magenta);
-  background: rgba(255, 46, 136, 0.06);
+.explorer a:hover, .explorer .folder-title:hover {
+  color: var(--gov-blue);
+}
+.explorer .folder-title {
+  font-weight: 600;
+  color: var(--gov-blue-deep);
 }
 
-/* ---------- Top Header Bar (with prominent search) ---------- */
+/* ---------- 顶部 Header（粘性 + 搜索栏） ---------- */
 
 header.header {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.6rem 1rem;
-  margin: 0 0 1rem 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 255, 225, 0.05) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  border-bottom: 1px solid rgba(0, 255, 225, 0.25);
+  padding: 0.7rem 1.2rem;
+  margin: 0 0 1.5rem 0;
+  background: #ffffff;
+  border-bottom: 1px solid var(--gov-border);
   position: sticky;
-  top: 0;
+  top: 4px; /* 让出顶部 4px 三色条 */
   z-index: 50;
-  backdrop-filter: blur(10px);
-  background-color: rgba(6, 8, 13, 0.85);
+  box-shadow: var(--gov-shadow-sm);
 }
 
 header.header > .search {
@@ -270,267 +340,338 @@ header.header .search-button {
   align-items: center;
   justify-content: flex-start;
   gap: 0.6rem;
-  background: rgba(0, 255, 225, 0.06) !important;
-  border: 1px solid rgba(0, 255, 225, 0.4) !important;
-  color: var(--neon-cyan) !important;
-  font-family: "JetBrains Mono", monospace !important;
-  padding: 0.5rem 0.9rem !important;
+  background: var(--gov-bg-soft) !important;
+  border: 1px solid var(--gov-border-strong) !important;
+  color: var(--gov-text-sub) !important;
+  font-family: "Noto Sans SC", sans-serif !important;
+  padding: 0.55rem 1rem !important;
   border-radius: 4px;
-  transition: all 0.2s ease;
-  box-shadow: inset 0 0 12px rgba(0, 255, 225, 0.05);
+  transition: all 0.15s ease;
   cursor: text;
+  font-weight: normal !important;
 }
 
 header.header .search-button p {
   margin: 0;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  color: var(--neon-cyan);
-  opacity: 0.85;
+  font-size: 0.92rem;
+  color: var(--gov-text-sub);
   flex-grow: 1;
   text-align: left;
 }
 
-/* 重写按钮文字为更醒目的占位提示 */
 header.header .search-button p::after {
-  content: "  ─  🔍 搜索 13 条产业 / 实体 / 反向链 / 关联节点 …  ⌘K";
+  content: "  ─  全文检索 · 13 条产业 / 12 实体 / 政策矩阵 …  ⌘K";
   margin-left: 0.5rem;
-  opacity: 0.55;
+  color: var(--gov-text-muted);
   font-size: 0.78rem;
 }
 
 header.header .search-button svg {
   width: 18px;
   height: 18px;
-  color: var(--neon-cyan);
-  filter: drop-shadow(0 0 4px rgba(0, 255, 225, 0.6));
+  color: var(--gov-blue);
 }
 
 header.header .search-button:hover,
 header.header .search-button:focus-within {
-  background: rgba(255, 46, 136, 0.08) !important;
-  border-color: var(--neon-magenta) !important;
-  box-shadow: 0 0 12px rgba(255, 46, 136, 0.3),
-              inset 0 0 12px rgba(255, 46, 136, 0.06);
+  background: #ffffff !important;
+  border-color: var(--gov-blue) !important;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
 }
-header.header .search-button:hover p,
-header.header .search-button:hover svg {
-  color: var(--neon-magenta);
+header.header .search-button:hover p {
+  color: var(--gov-blue-deep);
 }
 
-/* 缩短 ⌘K 提示在窄屏 */
 @media (max-width: 768px) {
   header.header .search-button p::after {
-    content: "  🔍 搜索  ⌘K";
+    content: "  全文检索  ⌘K";
   }
 }
 
-/* ---------- Search modal (preview pane) ---------- */
+/* ---------- 搜索模态弹层 ---------- */
 
 #search-container {
-  background: rgba(0, 0, 0, 0.85) !important;
-  backdrop-filter: blur(10px) !important;
+  background: rgba(15, 23, 42, 0.55) !important;
+  backdrop-filter: blur(6px) !important;
 }
 
 #search-container .search-space {
-  background: linear-gradient(
-    180deg,
-    rgba(6, 8, 13, 0.98) 0%,
-    rgba(2, 4, 10, 0.98) 100%
-  ) !important;
-  border: 1px solid var(--neon-cyan) !important;
+  background: #ffffff !important;
+  border: 1px solid var(--gov-border-strong) !important;
   border-radius: 6px !important;
-  box-shadow: 0 0 40px rgba(0, 255, 225, 0.25),
-              inset 0 0 30px rgba(0, 255, 225, 0.03) !important;
+  box-shadow: var(--gov-shadow-lg) !important;
 }
 
 #search-container .search-bar {
-  background: rgba(0, 255, 225, 0.05) !important;
-  border: 1px solid rgba(0, 255, 225, 0.35) !important;
-  color: var(--neon-cyan) !important;
-  font-family: "JetBrains Mono", monospace !important;
+  background: var(--gov-bg-soft) !important;
+  border: 1px solid var(--gov-border) !important;
+  color: var(--gov-text) !important;
+  font-family: "Noto Sans SC", sans-serif !important;
   font-size: 1rem !important;
-  letter-spacing: 0.04em;
   padding: 0.7rem 1rem !important;
   border-radius: 4px !important;
 }
 #search-container .search-bar::placeholder {
-  color: rgba(0, 255, 225, 0.5);
+  color: var(--gov-text-muted);
 }
 #search-container .search-bar:focus {
-  border-color: var(--neon-magenta) !important;
-  box-shadow: 0 0 12px rgba(255, 46, 136, 0.25);
+  border-color: var(--gov-blue) !important;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.12);
   outline: none;
 }
 
-/* 搜索结果列表 */
 #search-container .result-card {
-  background: rgba(0, 255, 225, 0.04) !important;
-  border: 1px solid rgba(0, 255, 225, 0.15) !important;
-  border-radius: 3px !important;
-  font-family: "JetBrains Mono", monospace !important;
-  transition: all 0.15s;
+  background: #ffffff !important;
+  border: 1px solid var(--gov-border) !important;
+  border-radius: 4px !important;
+  font-family: "Noto Sans SC", sans-serif !important;
+  transition: all 0.1s;
 }
 #search-container .result-card:hover,
 #search-container .result-card.focus {
-  background: rgba(255, 46, 136, 0.08) !important;
-  border-color: var(--neon-magenta) !important;
+  background: var(--gov-bg-tint) !important;
+  border-color: var(--gov-blue) !important;
+  box-shadow: var(--gov-shadow-sm);
 }
 #search-container .result-card h3 {
-  color: var(--neon-cyan) !important;
-  font-size: 0.95rem !important;
-  margin: 0 0 0.2rem 0 !important;
-  text-transform: none !important;
-  letter-spacing: 0 !important;
+  color: var(--gov-blue-deep) !important;
+  font-size: 0.98rem !important;
+  margin: 0 0 0.25rem 0 !important;
+  border: none !important;
+  padding: 0 !important;
+}
+#search-container .result-card h3::before {
+  display: none;
 }
 #search-container .result-card .meta {
-  color: var(--neon-amber) !important;
-  font-size: 0.7rem !important;
+  color: var(--gov-text-muted) !important;
+  font-size: 0.78rem !important;
 }
 
-/* 预览面板（关联内容） */
 #search-container .preview-container {
-  border-left: 1px solid rgba(0, 255, 225, 0.2);
+  border-left: 1px solid var(--gov-border);
   padding-left: 1rem;
 }
 
-/* highlight 高亮匹配片段 */
 #search-container mark {
-  background: linear-gradient(90deg, var(--neon-magenta), var(--neon-cyan)) !important;
-  color: #06080d !important;
+  background: rgba(201, 169, 97, 0.35) !important;
+  color: var(--gov-blue-deep) !important;
   padding: 0 2px;
   border-radius: 2px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-/* ---------- Graph view (enlarged) ---------- */
+/* ---------- Graph view（关系图谱）— 政务白底 + 蓝节点 ---------- */
 
-/* 侧栏图谱：250px → 480px */
 .graph > .graph-outer {
   height: 480px !important;
-  border: 1px solid rgba(0, 255, 225, 0.35) !important;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 255, 225, 0.05) 0%,
-    transparent 70%
-  );
-  box-shadow: inset 0 0 30px rgba(0, 255, 225, 0.08);
+  border: 1px solid var(--gov-border-strong) !important;
+  background: #ffffff;
+  box-shadow: var(--gov-shadow-sm);
+  border-radius: 4px;
 }
 
-/* 全屏图谱：80vh/80vw → 95vh/95vw */
 .graph > .global-graph-outer > .global-graph-container {
   width: 95vw !important;
   height: 95vh !important;
-  border: 1px solid rgba(0, 255, 225, 0.5) !important;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(6, 8, 13, 1) 0%,
-    rgba(2, 4, 10, 1) 100%
-  );
-  box-shadow: 0 0 60px rgba(0, 255, 225, 0.25),
-              inset 0 0 80px rgba(0, 255, 225, 0.04);
+  border: 1px solid var(--gov-border-strong) !important;
+  background: #ffffff;
+  box-shadow: var(--gov-shadow-lg);
+  border-radius: 6px;
 }
 
-/* 全屏背景遮罩 */
 .graph > .global-graph-outer {
-  backdrop-filter: blur(8px) !important;
-  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px) !important;
+  background: rgba(15, 23, 42, 0.5);
 }
 
-/* 全屏图标更显眼 */
 .graph .global-graph-icon {
-  opacity: 0.85 !important;
-  color: var(--neon-cyan) !important;
-  width: 28px !important;
-  height: 28px !important;
+  opacity: 0.7 !important;
+  color: var(--gov-blue) !important;
 }
 .graph .global-graph-icon:hover {
-  background-color: rgba(0, 255, 225, 0.15) !important;
+  background-color: var(--gov-bg-tint) !important;
   opacity: 1 !important;
 }
 
-/* 图谱里的节点字体 */
 #graph-container svg text {
-  font-family: "JetBrains Mono", monospace !important;
+  font-family: "Noto Sans SC", sans-serif !important;
+  fill: var(--gov-text-sub) !important;
 }
 
-/* ---------- Callouts (Obsidian style) ---------- */
-
-.callout {
-  border-radius: 4px !important;
-  font-family: "JetBrains Mono", monospace;
+/* 图谱节点样式（D3 渲染的，通过 currentColor 继承） */
+#graph-container svg .node {
+  fill: var(--gov-blue);
+}
+#graph-container svg .link {
+  stroke: var(--gov-border-strong);
 }
 
-/* ---------- TOC ---------- */
+/* ---------- 右侧栏（图谱 / 目录 / 反向链接） ---------- */
 
-#toc-content ul li a {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.85rem;
-}
-#toc-content ul li a:hover {
-  color: var(--neon-magenta) !important;
-}
-
-/* ---------- Backlinks ---------- */
-
-.backlinks h3 {
-  color: var(--neon-amber) !important;
-}
-
-/* ---------- Tag pills ---------- */
-
-a.internal.tag-link {
-  background: linear-gradient(90deg, rgba(255, 46, 136, 0.15), rgba(0, 255, 225, 0.1));
-  border: 1px solid rgba(255, 46, 136, 0.35);
-  color: var(--neon-magenta) !important;
-  font-size: 0.75rem;
+.right.sidebar h3 {
+  font-size: 0.92rem;
+  color: var(--gov-text-sub);
+  font-family: "Noto Sans SC", sans-serif;
+  font-weight: 600;
   letter-spacing: 0.05em;
-}
-a.internal.tag-link::before {
-  content: "#";
-  color: var(--neon-amber);
-  margin-right: 0.15em;
-}
-
-/* ---------- Horizontal rule ---------- */
-
-hr {
   border: none;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--neon-cyan) 20%,
-    var(--neon-magenta) 50%,
-    var(--neon-cyan) 80%,
-    transparent
-  );
-  margin: 2em 0;
-  box-shadow: 0 0 8px rgba(0, 255, 225, 0.3);
+  padding: 0;
+  margin-bottom: 0.6rem;
+}
+.right.sidebar h3::before {
+  display: none;
 }
 
-/* ---------- Article title (large) ---------- */
+.toc-content a {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 0.86rem;
+  color: var(--gov-text-sub);
+  border: none !important;
+}
+.toc-content a:hover {
+  color: var(--gov-blue);
+}
 
-.article-title {
-  font-family: "Orbitron", monospace !important;
-  color: var(--neon-cyan) !important;
-  text-shadow: var(--crt-glow);
-  letter-spacing: 0.04em;
+.backlinks a {
+  font-size: 0.88rem;
+  color: var(--gov-blue);
+  border-bottom: 1px dotted var(--gov-border-strong);
+}
+
+/* ---------- 文章页 meta（日期 / tag / 字数） ---------- */
+
+.content-meta {
+  color: var(--gov-text-muted);
+  font-size: 0.85rem;
+  font-family: "Noto Sans SC", sans-serif;
+}
+
+.tags {
+  margin: 0.5rem 0 1.5rem 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.tags .tag-link {
+  display: inline-block;
+  background: var(--gov-bg-tint);
+  color: var(--gov-blue);
+  border: 1px solid rgba(30, 64, 175, 0.2);
+  border-radius: 3px;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.78rem;
+  font-family: "Noto Sans SC", sans-serif;
+  font-weight: 500;
+}
+.tags .tag-link::before {
+  content: "# ";
+  color: var(--gov-text-muted);
+}
+.tags .tag-link:hover {
+  background: var(--gov-blue);
+  color: #fff;
+  border-color: var(--gov-blue-deep);
+}
+
+/* ---------- Breadcrumbs ---------- */
+
+.breadcrumb-container {
+  font-size: 0.85rem;
+  color: var(--gov-text-muted);
+  font-family: "Noto Sans SC", sans-serif;
+  margin-bottom: 0.8rem;
+}
+.breadcrumb-container a {
+  color: var(--gov-blue);
+  border: none !important;
 }
 
 /* ---------- Footer ---------- */
 
 footer {
-  border-top: 1px dashed rgba(0, 255, 225, 0.25);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.75rem;
-  color: var(--neon-cyan);
-  opacity: 0.7;
+  border-top: 1px solid var(--gov-border);
+  margin-top: 3rem;
+  padding-top: 1.2rem;
+  color: var(--gov-text-muted);
+  font-size: 0.85rem;
+  font-family: "Noto Sans SC", sans-serif;
 }
-footer::before {
-  content: "// EOF · 0x:NANSHA · COMPILED BY CLAWTIME × CLAUDE\A";
-  white-space: pre;
-  display: block;
-  margin-bottom: 0.5em;
-  color: var(--neon-magenta);
+footer a {
+  color: var(--gov-blue);
+  border: none !important;
 }
+
+/* ---------- 强调色 .callout / Obsidian callout ---------- */
+
+.callout {
+  background: var(--gov-bg-tint);
+  border: 1px solid rgba(30, 64, 175, 0.15);
+  border-left: 4px solid var(--gov-blue);
+  border-radius: 4px;
+  padding: 0.8rem 1.1rem;
+  margin: 1.2rem 0;
+  box-shadow: var(--gov-shadow-sm);
+}
+.callout-title {
+  color: var(--gov-blue-deep);
+  font-weight: 600;
+  font-family: "Noto Sans SC", sans-serif;
+}
+
+/* ---------- Popover（链接悬浮预览） ---------- */
+
+.popover .popover-inner {
+  background: #ffffff;
+  border: 1px solid var(--gov-border-strong);
+  box-shadow: var(--gov-shadow-md);
+  border-radius: 4px;
+}
+
+/* ---------- Article main padding ---------- */
+
+article.popover-hint {
+  background: #ffffff;
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--gov-border);
+  border-radius: 6px;
+  box-shadow: var(--gov-shadow-md);
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  article.popover-hint {
+    padding: 1rem 1rem;
+  }
+}
+
+/* ---------- Darkmode（夜读模式）：深邃蓝 + 暖金 ---------- */
+
+[saved-theme="dark"] body {
+  background: #0a1424;
+  background-image: linear-gradient(180deg, #0d172b 0%, #0a1424 600px);
+}
+[saved-theme="dark"] body::before {
+  background: linear-gradient(
+    90deg,
+    var(--gov-blue-light) 0%,
+    var(--gov-blue-light) 60%,
+    var(--gov-gold) 60%,
+    var(--gov-gold) 80%,
+    var(--gov-red) 80%,
+    var(--gov-red) 100%
+  );
+}
+[saved-theme="dark"] article.popover-hint,
+[saved-theme="dark"] header.header,
+[saved-theme="dark"] .left.sidebar {
+  background: #0f1c33;
+  border-color: #1e3a5c;
+}
+[saved-theme="dark"] h1 { color: var(--gov-blue-light); border-bottom-color: var(--gov-blue-light); }
+[saved-theme="dark"] h2 { color: var(--gov-blue-light); border-left-color: var(--gov-blue-light); }
+[saved-theme="dark"] h3 { color: var(--gov-blue-light); }
+[saved-theme="dark"] table thead { background: #1e3a5c; }
+[saved-theme="dark"] table tbody tr:nth-child(even) { background: #0d172b; }
+[saved-theme="dark"] table tbody tr:hover { background: #142440; }
