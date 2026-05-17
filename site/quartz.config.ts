@@ -2,14 +2,14 @@ import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
 /**
- * 0x:NANSHA · 南沙产业 Wiki — 政务科技风 (Government Tech)
+ * 广州南沙 8+2+3 现代化产业体系 · 知识图谱平台 — 政务科技风 (Government Tech)
  *
  * 政务深蓝 + 中国红 + 鎏金点缀，白底简洁，思源黑体，适配政府汇报场景。
  */
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "广州南沙 8+2+3 现代化产业体系 · 知识图谱平台",
-    pageTitleSuffix: " · 0x:NANSHA",
+    pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
     analytics: null,

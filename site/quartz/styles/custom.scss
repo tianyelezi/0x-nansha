@@ -153,10 +153,53 @@ strong, b {
 
 em, i {
   color: var(--gov-text-sub);
-  font-style: normal;
-  background: var(--gov-bg-tint);
-  padding: 0 0.25em;
-  border-radius: 2px;
+  font-style: italic;
+}
+
+/* ---------- 双语副标题：H1/H2/H3 下方紧跟一行 *English* 自动小字处理 ---------- */
+
+h1 + p,
+h2 + p,
+h3 + p {
+  /* default p after h: no special change */
+}
+
+h1 + p:has(> em:only-child) {
+  margin-top: -0.6rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--gov-border);
+}
+h1 + p > em:only-child {
+  display: block;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--gov-text-muted);
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+  letter-spacing: 0.03em;
+  font-weight: 400;
+}
+
+h2 + p:has(> em:only-child),
+h3 + p:has(> em:only-child) {
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+h2 + p > em:only-child,
+h3 + p > em:only-child {
+  display: block;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--gov-text-muted);
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+  letter-spacing: 0.04em;
+  font-weight: 400;
 }
 
 /* ---------- 表格：政务报告风（清晰边界、表头蓝底白字、斑马纹） ---------- */
@@ -469,6 +512,18 @@ header.header .search-button:hover p {
   background: #ffffff;
   box-shadow: var(--gov-shadow-sm);
   border-radius: 4px;
+  padding: 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 让 D3 渲染的 SVG / canvas 完全填满 outer 容器 */
+.graph > .graph-outer > .graph-container,
+.graph > .graph-outer > .graph-container > svg,
+.graph > .graph-outer > .graph-container > canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
 }
 
 .graph > .global-graph-outer > .global-graph-container {
@@ -478,6 +533,13 @@ header.header .search-button:hover p {
   background: #ffffff;
   box-shadow: var(--gov-shadow-lg);
   border-radius: 6px;
+  padding: 0 !important;
+  overflow: hidden;
+}
+.graph > .global-graph-outer > .global-graph-container > svg,
+.graph > .global-graph-outer > .global-graph-container > canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .graph > .global-graph-outer {
