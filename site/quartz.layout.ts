@@ -38,7 +38,23 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      title: "目录导航",
+      folderDefaultState: "open",
+      mapFn: (node) => {
+        const zh: Record<string, string> = {
+          concepts: "产业概念",
+          entities: "空间载体与组织",
+          analyses: "综合分析",
+          sources: "源文档",
+          log: "操作日志",
+          README: "说明",
+        }
+        if (node.slugSegment && zh[node.slugSegment]) {
+          node.displayName = zh[node.slugSegment]
+        }
+      },
+    }),
   ],
   right: [
     Component.Graph({
@@ -79,7 +95,23 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      title: "目录导航",
+      folderDefaultState: "open",
+      mapFn: (node) => {
+        const zh: Record<string, string> = {
+          concepts: "产业概念",
+          entities: "空间载体与组织",
+          analyses: "综合分析",
+          sources: "源文档",
+          log: "操作日志",
+          README: "说明",
+        }
+        if (node.slugSegment && zh[node.slugSegment]) {
+          node.displayName = zh[node.slugSegment]
+        }
+      },
+    }),
   ],
   right: [],
 }
