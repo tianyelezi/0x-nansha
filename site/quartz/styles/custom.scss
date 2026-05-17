@@ -238,16 +238,169 @@ tr:hover td {
   background: rgba(255, 46, 136, 0.06);
 }
 
-/* ---------- Search ---------- */
+/* ---------- Top Header Bar (with prominent search) ---------- */
 
-#search-container .search-button {
-  background: rgba(0, 255, 225, 0.06);
-  border: 1px solid rgba(0, 255, 225, 0.35);
-  color: var(--neon-cyan);
-  font-family: "JetBrains Mono", monospace;
+header.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  margin: 0 0 1rem 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 255, 225, 0.05) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  border-bottom: 1px solid rgba(0, 255, 225, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  background-color: rgba(6, 8, 13, 0.85);
 }
-#search-container .search-button::before {
-  content: "▸ ";
+
+header.header > .search {
+  flex-grow: 1;
+  width: 100%;
+}
+
+header.header .search-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  background: rgba(0, 255, 225, 0.06) !important;
+  border: 1px solid rgba(0, 255, 225, 0.4) !important;
+  color: var(--neon-cyan) !important;
+  font-family: "JetBrains Mono", monospace !important;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 0 12px rgba(0, 255, 225, 0.05);
+  cursor: text;
+}
+
+header.header .search-button p {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: var(--neon-cyan);
+  opacity: 0.85;
+  flex-grow: 1;
+  text-align: left;
+}
+
+/* 重写按钮文字为更醒目的占位提示 */
+header.header .search-button p::after {
+  content: "  ─  🔍 搜索 13 条产业 / 实体 / 反向链 / 关联节点 …  ⌘K";
+  margin-left: 0.5rem;
+  opacity: 0.55;
+  font-size: 0.78rem;
+}
+
+header.header .search-button svg {
+  width: 18px;
+  height: 18px;
+  color: var(--neon-cyan);
+  filter: drop-shadow(0 0 4px rgba(0, 255, 225, 0.6));
+}
+
+header.header .search-button:hover,
+header.header .search-button:focus-within {
+  background: rgba(255, 46, 136, 0.08) !important;
+  border-color: var(--neon-magenta) !important;
+  box-shadow: 0 0 12px rgba(255, 46, 136, 0.3),
+              inset 0 0 12px rgba(255, 46, 136, 0.06);
+}
+header.header .search-button:hover p,
+header.header .search-button:hover svg {
+  color: var(--neon-magenta);
+}
+
+/* 缩短 ⌘K 提示在窄屏 */
+@media (max-width: 768px) {
+  header.header .search-button p::after {
+    content: "  🔍 搜索  ⌘K";
+  }
+}
+
+/* ---------- Search modal (preview pane) ---------- */
+
+#search-container {
+  background: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+#search-container .search-space {
+  background: linear-gradient(
+    180deg,
+    rgba(6, 8, 13, 0.98) 0%,
+    rgba(2, 4, 10, 0.98) 100%
+  ) !important;
+  border: 1px solid var(--neon-cyan) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 0 40px rgba(0, 255, 225, 0.25),
+              inset 0 0 30px rgba(0, 255, 225, 0.03) !important;
+}
+
+#search-container .search-bar {
+  background: rgba(0, 255, 225, 0.05) !important;
+  border: 1px solid rgba(0, 255, 225, 0.35) !important;
+  color: var(--neon-cyan) !important;
+  font-family: "JetBrains Mono", monospace !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.04em;
+  padding: 0.7rem 1rem !important;
+  border-radius: 4px !important;
+}
+#search-container .search-bar::placeholder {
+  color: rgba(0, 255, 225, 0.5);
+}
+#search-container .search-bar:focus {
+  border-color: var(--neon-magenta) !important;
+  box-shadow: 0 0 12px rgba(255, 46, 136, 0.25);
+  outline: none;
+}
+
+/* 搜索结果列表 */
+#search-container .result-card {
+  background: rgba(0, 255, 225, 0.04) !important;
+  border: 1px solid rgba(0, 255, 225, 0.15) !important;
+  border-radius: 3px !important;
+  font-family: "JetBrains Mono", monospace !important;
+  transition: all 0.15s;
+}
+#search-container .result-card:hover,
+#search-container .result-card.focus {
+  background: rgba(255, 46, 136, 0.08) !important;
+  border-color: var(--neon-magenta) !important;
+}
+#search-container .result-card h3 {
+  color: var(--neon-cyan) !important;
+  font-size: 0.95rem !important;
+  margin: 0 0 0.2rem 0 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+#search-container .result-card .meta {
+  color: var(--neon-amber) !important;
+  font-size: 0.7rem !important;
+}
+
+/* 预览面板（关联内容） */
+#search-container .preview-container {
+  border-left: 1px solid rgba(0, 255, 225, 0.2);
+  padding-left: 1rem;
+}
+
+/* highlight 高亮匹配片段 */
+#search-container mark {
+  background: linear-gradient(90deg, var(--neon-magenta), var(--neon-cyan)) !important;
+  color: #06080d !important;
+  padding: 0 2px;
+  border-radius: 2px;
+  font-weight: bold;
 }
 
 /* ---------- Graph view (enlarged) ---------- */
