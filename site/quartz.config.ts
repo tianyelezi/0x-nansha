@@ -14,7 +14,7 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: null,
     locale: "zh-CN",
-    baseUrl: "0x-nansha.local",
+    baseUrl: "tianyelezi.github.io/0x-nansha",
     ignorePatterns: ["private", "templates", ".obsidian", "**/_template.md"],
     defaultDateType: "modified",
     generateSocialImages: false,
