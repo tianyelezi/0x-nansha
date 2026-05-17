@@ -109,6 +109,10 @@ cp ~/my-notes.md raw/articles/
 
 ## 🌐 `0x:NANSHA` 站点（复古科幻）
 
+> 🚀 **线上访问：** https://tianyelezi.github.io/0x-nansha/  
+> 📦 **GitHub 仓库：** https://github.com/tianyelezi/0x-nansha  
+> 🤖 **自动部署：** push 到 `main` 即触发 GitHub Actions 重新构建
+
 把 `wiki/` 编译为可浏览站点（Quartz v4），自定义霓虹青/品红 + CRT 扫描线 + 终端字体。
 
 ### 启动开发服务器
