@@ -41,14 +41,16 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Explorer({
       title: "目录导航",
       folderDefaultState: "open",
+      filterFn: (node) => {
+        const hidden = new Set(["tags", "log", "README", "readme"])
+        return !hidden.has(node.slugSegment ?? "")
+      },
       mapFn: (node) => {
         const zh: Record<string, string> = {
           concepts: "产业概念",
           entities: "空间载体与组织",
           analyses: "综合分析",
           sources: "源文档",
-          log: "操作日志",
-          README: "说明",
         }
         if (node.slugSegment && zh[node.slugSegment]) {
           node.displayName = zh[node.slugSegment]
@@ -98,14 +100,16 @@ export const defaultListPageLayout: PageLayout = {
     Component.Explorer({
       title: "目录导航",
       folderDefaultState: "open",
+      filterFn: (node) => {
+        const hidden = new Set(["tags", "log", "README", "readme"])
+        return !hidden.has(node.slugSegment ?? "")
+      },
       mapFn: (node) => {
         const zh: Record<string, string> = {
           concepts: "产业概念",
           entities: "空间载体与组织",
           analyses: "综合分析",
           sources: "源文档",
-          log: "操作日志",
-          README: "说明",
         }
         if (node.slugSegment && zh[node.slugSegment]) {
           node.displayName = zh[node.slugSegment]
