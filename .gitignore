@@ -1,0 +1,43 @@
+# --- macOS ---
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# --- Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Obsidian (keep config minimal, exclude workspace) ---
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/community-plugins.json
+
+# --- Claude / harness ---
+.claude/
+.claudian/
+.playwright-mcp/
+
+# --- Quartz site ---
+site/node_modules/
+site/public/
+site/.quartz-cache/
+site/*.log
+site/*.png
+site/.playwright-mcp/
+
+# --- Logs & temp ---
+*.log
+*.tmp
+.cache/
+
+# --- Sensitive ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
